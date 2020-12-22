@@ -1,0 +1,6 @@
+nlu
+streamlit
+matplotlib
+plotly
+seaborn
+scikit-learn
