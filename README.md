@@ -1,10 +1,18 @@
 # Word Embedding with (John Snow Lab) NLU
  NLU has created a powerful API for embeddings (and even some NLP downstream-task like sarcasm detection or sentiment classification) in 1-liner of code. However, at the beginning of each NLP projects, you are facing the issue of selecting the model that fits best to your data structure. This app is designed for selecting and comparing pre-trained NLP models from NLU (John Snow Lab) with own data. Whether your project has word, sentence or document embeddings: upload the data, select some pre-trained models and download the embeddings. 
 
-This app is powered by [Streamlit](https://www.streamlit.io/) and has teh sections:
-* Word embbeding 
-* Sentance or Document embedding
-* Fake News Classifier
+![](pic/landing_page.png)
+
+This app was build with [Streamlit](https://www.streamlit.io/) and has the sections:  
+
+**Word embbeding**
+![](pic/word_embedding_page.png)
+
+**Sentance or Document embedding**
+![](pic/doc_embedding_page.png)
+
+**Fake News Classifier**
+![](pic/fake_news_page.png)
 
 # Get start on your local machine
 Getting start with the description below on your go to [John White Lab Installation](https://nlu.johnsnowlabs.com/docs/en/install)

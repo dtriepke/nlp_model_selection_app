@@ -24,7 +24,7 @@ def sentence_split(txt):
 
 @st.cache
 def get_weighted_confidence_scores(df):
-    """Function for aggregate over the sentence based fakenews decision apply the weighted mean for each class.
+    """Function for aggregate over the sentence based fakenews decisions and apply the weighted mean.
     Weights are the shares of fakes and real sentences in the data
     ---------
     in -> pandas data frame from nlu prediction 
@@ -34,18 +34,21 @@ def get_weighted_confidence_scores(df):
     df["fakenews_confidence"] = df.fakenews_confidence.astype(float)
 
     df_agg = df.groupby('fakenews', as_index = True)["fakenews_confidence"] \
-        .agg([("mean", np.mean)
-            ,("var", np.var)
-            ,("count", np.size)
+        .agg([("mean confidence score", np.mean)
+            # ,("var confidence score", np.var)
+            # ,("number sentences", np.size)
             ,("weights", lambda x: x.size / float(df.__len__())) 
             ]) \
         .reset_index()
 
-    df_agg["weighted_mean"] = df_agg["mean"] * df_agg["weights"]
+    df_agg["weighted_mean"] = df_agg["mean confidence score"] * df_agg["weights"]
     fake_confidence = df_agg.loc[df_agg.fakenews == "FAKE", "weighted_mean"]
     real_confidence = df_agg.loc[df_agg.fakenews == "REAL", "weighted_mean"]
 
-    return float(fake_confidence), float(real_confidence)
+    fake_confidence = float(fake_confidence) if fake_confidence.any() else 0.0
+    real_confidence = float(real_confidence) if real_confidence.any() else 0.0
+
+    return fake_confidence, real_confidence
 
 
 @st.cache
@@ -59,9 +62,9 @@ def get_describe_over_fake_real_classes(df):
     df["fakenews_confidence"] = df.fakenews_confidence.astype(float)
 
     df_agg = df.groupby('fakenews', as_index = True)["fakenews_confidence"] \
-        .agg([("mean", np.mean)
-            ,("var", np.var)
-            ,("count", np.size)
+        .agg([("mean confidence score", np.mean)
+            ,("var confidence score", np.var)
+            ,("number sentences", np.size)
             ,("weights", lambda x: x.size / float(df.__len__())) 
             ]) \
         .reset_index()
@@ -110,7 +113,8 @@ def show(session_state):
             st.success("Calculation done!")
 
             # Results
-            st.header("Decision Overall")
+            st.header("Result")
+            st.write("DEBUG", session_state.fakenews_out)
             fake_confidence, real_confidence = get_weighted_confidence_scores(session_state.fakenews_out)
             if fake_confidence > real_confidence:
                 fakenews = "FAKE"
@@ -120,13 +124,13 @@ def show(session_state):
                 st.info("The news are {} with a certainty of {}".format(fakenews, real_confidence))
             st.write("*Note: the decision is infered from the weighted mean of as FAKE or REAL detected sentences.*")
 
-            st.header("Sentence Based View")
+            st.header("Deep Dive")
             st.dataframe(get_describe_over_fake_real_classes(session_state.fakenews_out))
             session_state.fakenews_fig = px.histogram(session_state.fakenews_out, x = "fakenews")
             st.plotly_chart(session_state.fakenews_fig)
 
             
-            st.write("**Sentence embeddings**")
+            st.write("**Sentence Embeddings**")
             st.dataframe(session_state.fakenews_out)
     else:
         st.info("No model loaded. Please load first a model!")
