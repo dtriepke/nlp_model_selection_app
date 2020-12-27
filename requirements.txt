@@ -1,4 +1,5 @@
 nlu
+pyspark==2.4.7
 streamlit
 matplotlib
 plotly
