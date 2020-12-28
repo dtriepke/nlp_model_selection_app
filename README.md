@@ -8,7 +8,7 @@ This app was build with [Streamlit](https://www.streamlit.io/) and has the secti
 **Word embbeding**
 ![](pic/word_embedding_page.png)
 
-**Sentance or Document embedding**
+**Sentence or Document embedding**
 ![](pic/doc_embedding_page.png)
 
 **Fake News Classifier**
@@ -38,12 +38,12 @@ $ java -version
 * Set environment variable HADOOP_HOME to C:\winutils
 
 ## 3 Install NLU
-Install `PySpark` based NLU form pip.  
+Install `PySpark` based NLU form pip.  Please note that since nlu 1.0.5, you need to install PySpark separately and you need to use PySpark 2.4 (or use PySpark compatible with Spark 2.4 from your Spark provider).
 
-*Note: For `nlu<=1.0.2` please use a Python version with version number SMALLER than 3.8* 
+*Note: For `nlu<=1.0.5`, or other versions that are based on Spark 2.4, please use a Python version with version number SMALLER than 3.8* 
 
 ```bash
-$ pip install nlu
+$ pip install nlu pyspark==2.4.7
 ```
  
 
