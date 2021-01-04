@@ -9,12 +9,11 @@ def show(session_state):
         """
         ![JohnSnowLabs](https://nlp.johnsnowlabs.com/assets/images/logo.png)
 
-        # Welcome to NLU App :spock-hand:
+        # Welcome to NLU Powered Model Selection App :spock-hand:
 
-        **Select one model form the drop down menu** in order to start.  
-
-        Here you can find John Snow Lab NLU showcases. 
+        Here you can find John Snow Lab NLU showcases.
         With the freshly released NLU library which gives you 350+ NLP models and 100+ Word Embeddings, you have infinite possibilities to explore your data and gain insights. 
+        The app can help you to select between the most popular pre-trained word, sentence or document embeddings based on your own data.
         """
         )
 

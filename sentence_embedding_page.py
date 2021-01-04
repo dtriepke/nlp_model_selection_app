@@ -98,9 +98,9 @@ def show(session_state):
 
     # MAIN PAGE
     st.title("Sentence or Document Embeddings with NLU")
-    st.info("This is an comparison of some of the embedding developments of [**John Snow Lab**](https://nlu.johnsnowlabs.com/). \
+    st.info("This is a comparison of some of the embedding developments of [**John Snow Lab**](https://nlu.johnsnowlabs.com/). \
             Here you can find **BERT**, **ALBERT**, **ELMO**, **ELECTRA**, **XLNET** and **GLOVE** embeddings in one output. "
-            "You can download ouput or use the result for NLP model selection "
+            "You can download the output or use the result for NLP model selection."
             )
 
     st.write("""
